@@ -351,10 +351,13 @@ object ProtobufEncoder {
   }
 
   def main(args: Array[String]): Unit = {
-    val entity =
-      new EntityKey(Seq("driver_id", "entity_id"), Seq(Value(Val.Int64Val(1004)), Value(Val.StringVal("Hello"))))
-    val fos = new FileOutputStream("""C:\tmp\sparkserialie.bin""")
-    fos.write(serializeStable(entity))
-    fos.close()
+Min
+    print(serializeValue(null, "STRING"))
+
+//    val entity =
+//      new EntityKey(Seq("driver_id", "entity_id"), Seq(Value(Val.Int64Val(1004)), Value(Val.StringVal("Hello"))))
+//    val fos = new FileOutputStream("""C:\tmp\sparkserialie.bin""")
+//    fos.write(serializeStable(entity))
+//    fos.close()
   }
 }
