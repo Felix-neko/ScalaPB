@@ -351,10 +351,26 @@ object ProtobufEncoder {
   }
 
   def main(args: Array[String]): Unit = {
-    val entity =
-      new EntityKey(Seq("driver_id", "entity_id"), Seq(Value(Val.Int64Val(1004)), Value(Val.StringVal("Hello"))))
-    val fos = new FileOutputStream("""C:\tmp\sparkserialie.bin""")
-    fos.write(serializeStable(entity))
-    fos.close()
+
+    val spark = SparkSession.builder().master("local[*]").config("hive.metastore.uris", "thrift://quickstart-bigdata:9083")
+      .enableHiveSupport().getOrCreate()
+
+    println("\n\n")
+    spark.sql("USE mmb")
+
+    var sdf = spark.sql("SELECT * FROM mmb_features")
+
+    var channelRowArray = sdf.select("channel_ccode").collect()
+    var problemCellVal: String = channelRowArray(3).getString(0)
+    println(problemCellVal)
+
+    val serialized = serializeString(problemCellVal)
+    print(serialized)
+    println("\n\n")
+//    val entity =
+//      new EntityKey(Seq("driver_id", "entity_id"), Seq(Value(Val.Int64Val(1004)), Value(Val.StringVal("Hello"))))
+//    val fos = new FileOutputStream("""serialized.bin""")
+//    fos.write(serializeStable(entity))
+//    fos.close()
   }
 }

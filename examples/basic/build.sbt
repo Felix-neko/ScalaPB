@@ -5,3 +5,4 @@ Compile / PB.targets := Seq(
 )
 
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.0"
+libraryDependencies += "org.apache.spark" %% "spark-hive" % "2.4.0"
